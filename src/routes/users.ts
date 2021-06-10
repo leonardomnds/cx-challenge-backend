@@ -28,7 +28,7 @@ usersRouter.post('/', async (req, res) => {
 
   UsersDatabase.push(newUser);
 
-  return res.json({ id: newUser.id });
+  return res.status(201).json({ id: newUser.id });
 });
 
 export default usersRouter;
