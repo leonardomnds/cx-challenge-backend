@@ -4,13 +4,13 @@ import { uuid } from 'uuidv4';
 import CustomersDatabase, { Customer } from '../database/customers';
 import CustomError from '../errors/CustomError';
 
-const usersRouter = Router();
+const customersRoute = Router();
 
-usersRouter.get('/', async (req, res) => res.json(CustomersDatabase));
+customersRoute.get('/', async (req, res) => res.json(CustomersDatabase));
 
-usersRouter.get('/:customerId', async (req, res) => res.json(CustomersDatabase.filter((c) => c.id === req.params.customerId)));
+customersRoute.get('/:customerId', async (req, res) => res.json(CustomersDatabase.filter((c) => c.id === req.params.customerId)[0] || []));
 
-usersRouter.post('/', async (req, res) => {
+customersRoute.post('/', async (req, res) => {
   const {
     name, email, phone, createdAt,
   } = req.body as Customer;
@@ -28,7 +28,7 @@ usersRouter.post('/', async (req, res) => {
   return res.status(201).json(newCustomer);
 });
 
-usersRouter.put('/:customerId', async (req, res) => {
+customersRoute.put('/:customerId', async (req, res) => {
   const {
     name, email, phone,
   } = req.body as Customer;
@@ -51,7 +51,7 @@ usersRouter.put('/:customerId', async (req, res) => {
   return res.json(editCustomer);
 });
 
-usersRouter.delete('/:customerId', async (req, res) => {
+customersRoute.delete('/:customerId', async (req, res) => {
   const deleteIndex = CustomersDatabase.findIndex((c) => c.id === req.params.customerId);
 
   if (deleteIndex === -1) {
@@ -63,4 +63,4 @@ usersRouter.delete('/:customerId', async (req, res) => {
   return res.json({ success: true });
 });
 
-export default usersRouter;
+export default customersRoute;
