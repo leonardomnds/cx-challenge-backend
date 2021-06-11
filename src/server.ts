@@ -7,6 +7,7 @@ import 'express-async-errors';
 import routes from './routes';
 
 import CustomError from './errors/CustomError';
+import CustomValidationError from './errors/CustomValidationError';
 
 const app = express();
 
@@ -19,6 +20,15 @@ app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
     return res.status(err.statusCode).json({
       error: true,
       message: err.message,
+    });
+  }
+
+  if (err instanceof CustomValidationError) {
+    return res.status(err.statusCode).json({
+      error: true,
+      message: err.message,
+      param: err.param,
+      reason: err.reason,
     });
   }
 

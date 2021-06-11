@@ -5,10 +5,12 @@ import { uuid } from 'uuidv4';
 import CustomError from '../errors/CustomError';
 
 import UsersDatabase, { User } from '../database/users';
+import { CreateUserSchema } from '../schemas/Users';
+import validateSchema from '../middlewares/schema';
 
 const usersRouter = Router();
 
-usersRouter.post('/', async (req, res) => {
+usersRouter.post('/', validateSchema(CreateUserSchema), async (req, res) => {
   const { name, email, password } = req.body as User;
 
   const checkIfExists = UsersDatabase.filter((user) => user.email === email.toLowerCase())[0];

@@ -4,13 +4,16 @@ import { uuid } from 'uuidv4';
 import CustomersDatabase, { Customer } from '../database/customers';
 import CustomError from '../errors/CustomError';
 
+import { CreateCustomerSchema, UpdateCustomerSchema } from '../schemas/Customers';
+import validateSchema from '../middlewares/schema';
+
 const customersRoute = Router();
 
 customersRoute.get('/', async (req, res) => res.json(CustomersDatabase));
 
 customersRoute.get('/:customerId', async (req, res) => res.json(CustomersDatabase.filter((c) => c.id === req.params.customerId)[0] || []));
 
-customersRoute.post('/', async (req, res) => {
+customersRoute.post('/', validateSchema(CreateCustomerSchema), async (req, res) => {
   const {
     name, email, phone, createdAt,
   } = req.body as Customer;
@@ -28,7 +31,7 @@ customersRoute.post('/', async (req, res) => {
   return res.status(201).json(newCustomer);
 });
 
-customersRoute.put('/:customerId', async (req, res) => {
+customersRoute.put('/:customerId', validateSchema(UpdateCustomerSchema), async (req, res) => {
   const {
     name, email, phone,
   } = req.body as Customer;

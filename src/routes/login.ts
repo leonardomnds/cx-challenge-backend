@@ -5,10 +5,12 @@ import authConfig from '../config/auth';
 
 import UsersDatabase, { User } from '../database/users';
 import CustomError from '../errors/CustomError';
+import { LoginSchema } from '../schemas/Login';
+import validateSchema from '../middlewares/schema';
 
 const loginRouter = Router();
 
-loginRouter.post('/', async (req, res) => {
+loginRouter.post('/', validateSchema(LoginSchema), async (req, res) => {
   const { email, password } = req.body as User;
 
   const user = UsersDatabase.filter((u) => u.email === email.toLowerCase())[0];

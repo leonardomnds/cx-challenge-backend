@@ -5,6 +5,9 @@ import ContactsDatabase, { Contact } from '../database/contacts';
 import CustomersDatabase, { Customer } from '../database/customers';
 import CustomError from '../errors/CustomError';
 
+import { CreateContactSchema, UpdateContactSchema } from '../schemas/Contacts';
+import validateSchema from '../middlewares/schema';
+
 const contactsRoute = Router({ mergeParams: true });
 
 contactsRoute.get('/', async (req, res) => {
@@ -18,12 +21,11 @@ contactsRoute.get('/:contactId', async (req, res) => {
     && c.id === req.params.contactId)[0] || []);
 });
 
-contactsRoute.post('/', async (req, res) => {
+contactsRoute.post('/', validateSchema(CreateContactSchema), async (req, res) => {
   const {
     name, email, phone,
   } = req.body as Contact;
 
-  // @ts-expect-error TS não reconhece o parametro passado pelo outro arquivo
   const customerIndex = CustomersDatabase.findIndex((c) => c.id === req.params.customerId);
 
   if (customerIndex === -1) {
@@ -43,12 +45,11 @@ contactsRoute.post('/', async (req, res) => {
   return res.status(201).json(newContact);
 });
 
-contactsRoute.put('/:contactId', async (req, res) => {
+contactsRoute.put('/:contactId', validateSchema(UpdateContactSchema), async (req, res) => {
   const {
     name, email, phone,
   } = req.body as Customer;
 
-  // @ts-expect-error TS não reconhece o parametro passado pelo outro arquivo
   const editIndex = ContactsDatabase.findIndex((c) => c.customerId === req.params.customerId
     && c.id === req.params.contactId);
 
