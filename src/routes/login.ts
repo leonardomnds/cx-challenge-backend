@@ -15,7 +15,7 @@ loginRouter.post('/', validateSchema(LoginSchema), async (req: Request, res: Res
 
   const user = UsersDatabase.filter((u) => u.email === email.toLowerCase())[0];
 
-  const isValidPassword = user ? compare(password, user.password) : false;
+  const isValidPassword = user ? (await compare(password, user.password)) : false;
 
   if (!user || !isValidPassword) {
     throw new CustomError('Combinação de E-mail e senha inválida', 401);

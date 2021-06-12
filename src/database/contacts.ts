@@ -11,7 +11,7 @@ const Contacts: Contact[] = [{
   customerId: '9667019f-c2fd-4f66-85e2-d5feefe5dc0e',
   name: 'Ricardo Grassi',
   email: 'ricardo.grassi@customerx.cx',
-  phone: '(45) 99999-9999',
+  phone: '45999999999',
 }];
 
 export default Contacts;
