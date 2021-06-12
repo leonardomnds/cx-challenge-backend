@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { uuid } from 'uuidv4';
 
 import CustomersDatabase, { Customer } from '../database/customers';
@@ -9,11 +9,11 @@ import validateSchema from '../middlewares/schema';
 
 const customersRoute = Router();
 
-customersRoute.get('/', async (req, res) => res.json(CustomersDatabase));
+customersRoute.get('/', async (req: Request, res: Response) => res.json(CustomersDatabase));
 
-customersRoute.get('/:customerId', async (req, res) => res.json(CustomersDatabase.filter((c) => c.id === req.params.customerId)[0] || []));
+customersRoute.get('/:customerId', async (req: Request, res: Response) => res.json(CustomersDatabase.filter((c) => c.id === req.params.customerId)[0] || []));
 
-customersRoute.post('/', validateSchema(CreateCustomerSchema), async (req, res) => {
+customersRoute.post('/', validateSchema(CreateCustomerSchema), async (req: Request, res: Response) => {
   const {
     name, email, phone, createdAt,
   } = req.body as Customer;
@@ -31,7 +31,7 @@ customersRoute.post('/', validateSchema(CreateCustomerSchema), async (req, res) 
   return res.status(201).json(newCustomer);
 });
 
-customersRoute.put('/:customerId', validateSchema(UpdateCustomerSchema), async (req, res) => {
+customersRoute.put('/:customerId', validateSchema(UpdateCustomerSchema), async (req: Request, res: Response) => {
   const {
     name, email, phone,
   } = req.body as Customer;
@@ -54,7 +54,7 @@ customersRoute.put('/:customerId', validateSchema(UpdateCustomerSchema), async (
   return res.json(editCustomer);
 });
 
-customersRoute.delete('/:customerId', async (req, res) => {
+customersRoute.delete('/:customerId', async (req: Request, res: Response) => {
   const deleteIndex = CustomersDatabase.findIndex((c) => c.id === req.params.customerId);
 
   if (deleteIndex === -1) {

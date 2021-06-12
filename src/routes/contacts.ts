@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { uuid } from 'uuidv4';
 
 import ContactsDatabase, { Contact } from '../database/contacts';
@@ -10,18 +10,16 @@ import validateSchema from '../middlewares/schema';
 
 const contactsRoute = Router({ mergeParams: true });
 
-contactsRoute.get('/', async (req, res) => {
-  // @ts-expect-error TS não reconhece o parametro passado pelo outro arquivo
+contactsRoute.get('/', async (req: Request, res: Response) => {
   res.json(ContactsDatabase.filter((c) => c.customerId === req.params.customerId));
 });
 
-contactsRoute.get('/:contactId', async (req, res) => {
-  // @ts-expect-error TS não reconhece o parametro passado pelo outro arquivo
+contactsRoute.get('/:contactId', async (req: Request, res: Response) => {
   res.json(ContactsDatabase.filter((c) => c.customerId === req.params.customerId
     && c.id === req.params.contactId)[0] || []);
 });
 
-contactsRoute.post('/', validateSchema(CreateContactSchema), async (req, res) => {
+contactsRoute.post('/', validateSchema(CreateContactSchema), async (req: Request, res: Response) => {
   const {
     name, email, phone,
   } = req.body as Contact;
@@ -45,7 +43,7 @@ contactsRoute.post('/', validateSchema(CreateContactSchema), async (req, res) =>
   return res.status(201).json(newContact);
 });
 
-contactsRoute.put('/:contactId', validateSchema(UpdateContactSchema), async (req, res) => {
+contactsRoute.put('/:contactId', validateSchema(UpdateContactSchema), async (req: Request, res: Response) => {
   const {
     name, email, phone,
   } = req.body as Customer;
@@ -69,8 +67,7 @@ contactsRoute.put('/:contactId', validateSchema(UpdateContactSchema), async (req
   return res.json(editContact);
 });
 
-contactsRoute.delete('/:contactId', async (req, res) => {
-  // @ts-expect-error TS não reconhece o parametro passado pelo outro arquivo
+contactsRoute.delete('/:contactId', async (req: Request, res: Response) => {
   const deleteIndex = ContactsDatabase.findIndex((c) => c.customerId === req.params.customerId
     && c.id === req.params.contactId);
 

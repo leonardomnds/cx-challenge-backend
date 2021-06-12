@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { compare } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import authConfig from '../config/auth';
@@ -10,7 +10,7 @@ import validateSchema from '../middlewares/schema';
 
 const loginRouter = Router();
 
-loginRouter.post('/', validateSchema(LoginSchema), async (req, res) => {
+loginRouter.post('/', validateSchema(LoginSchema), async (req: Request, res: Response) => {
   const { email, password } = req.body as User;
 
   const user = UsersDatabase.filter((u) => u.email === email.toLowerCase())[0];

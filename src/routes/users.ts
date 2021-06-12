@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import { hash } from 'bcryptjs';
 import { uuid } from 'uuidv4';
 
@@ -10,7 +10,7 @@ import validateSchema from '../middlewares/schema';
 
 const usersRouter = Router();
 
-usersRouter.post('/', validateSchema(CreateUserSchema), async (req, res) => {
+usersRouter.post('/', validateSchema(CreateUserSchema), async (req: Request, res: Response) => {
   const { name, email, password } = req.body as User;
 
   const checkIfExists = UsersDatabase.filter((user) => user.email === email.toLowerCase())[0];
