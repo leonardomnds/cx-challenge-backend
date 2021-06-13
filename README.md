@@ -14,13 +14,13 @@ Para executar esta Api, siga os passos abaixo:
   git clone https://github.com/leonardomnds/cx-challenge-backend.git
   ```
 
-1. Acesso a pasta do projeto
+2. Acesso a pasta do projeto
 
   ```shell
   cd cx-challenge-backend
   ```
 
-1. Instale as dependências e execute a Api
+3. Instale as dependências e execute a Api
 
   ```shell
   yarn && yarn start
