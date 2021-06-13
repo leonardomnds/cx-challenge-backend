@@ -4,6 +4,12 @@ Este projeto faz parte do desafio de um processo seletivo para Desenvolvedor Ful
 
 A parte Frontend que consome este projeto, está disponível [neste repositório](https://github.com/leonardomnds/cx-challenge-frontend).
 
+## Stack
+
+- NodeJS
+- Express
+- Typescript
+
 ## Requisitos
 
 - [NodeJS 14.x](https://nodejs.org/en/download/)
