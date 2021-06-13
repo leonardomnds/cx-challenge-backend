@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Clientes</title>
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-size: 14px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      padding: 2cm;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    #header {
+      padding: 16px;
+      padding-right: 0;
+      border: 1px solid black;
+    }
+
+    #title {
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    #date-label {
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    #header-customer thead,
+    #header-contact thead {
+      font-weight: 600;
+    }
+
+    #header-customer,
+    #header-contact {
+      padding: 10px 0;
+    }
+
+    #header-customer {
+      border-bottom: 1px solid black;
+    }
+
+  </style>
+
+</head>
+<body>
+  <table id="header">
+    <tbody>
+      <tr>
+        <td rowspan="2" id="title" width="75%">Lista de Clientes</td>
+        <td id="date-label" class="center" width="25%">Emissão</td>
+      </tr>
+      <tr>
+        <td class="center" width="25%">
+          <%= generateDate %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <% customers.forEach(function(cus) { %>
+      <table id="header-customer">
+        <thead>
+          <tr>
+            <td width="40%">Nome</td>
+            <td width="35%">E-mail</td>
+            <td width="25%" class="center">Telefone</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td width="40%"> <%= cus.name %> </td>
+            <td width="35%"> <%= cus.email %> </td>
+            <td width="25%" class="center"> <%= cus.phone %> </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table id="header-contact">
+        <thead>
+          <tr>
+            <td width="40%">Nome do contato</td>
+            <td width="35%">E-mail do contato</td>
+            <td width="25%" class="center">Telefone do contato</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% cus.contacts.forEach(function(con) { %>
+            <tr>
+              <td width="40%"> <%= con.name %> </td>
+              <td width="35%"> <%= con.email %> </td>
+              <td width="25%" class="center"> <%= con.phone %> </td>
+            </tr>
+          <% }) %>
+        </tbody>
+    <% }) %>
+  </div>
+</body>
+</html>
