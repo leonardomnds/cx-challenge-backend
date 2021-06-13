@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import 'express-async-errors';
@@ -38,4 +36,4 @@ app.use((err: Error, req: Request, res: Response, _: NextFunction) => {
   });
 });
 
-app.listen(process.env.PORT || 3001);
+app.listen(process.env.PORT || 9991);
