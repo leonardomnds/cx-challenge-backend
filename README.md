@@ -24,10 +24,16 @@ Para executar esta Api, siga os passos abaixo:
   cd cx-challenge-backend
   ```
 
-3. Instale as dependências e execute a Api
+3. Instale as dependências
 
   ```shell
-  yarn && yarn start
+  yarn
+  ```
+
+4. Execute o sistema
+
+  ```shell
+  yarn start
   ```
 
 A aplicação rodará na porta 9991, e pode ser testada por [este projeto](https://github.com/leonardomnds/cx-challenge-frontend).
