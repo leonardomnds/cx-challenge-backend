@@ -7,6 +7,7 @@ A parte Frontend que consome este projeto, está disponível [neste repositório
 ## Requisitos
 
 - [NodeJS 14.x](https://nodejs.org/en/download/)
+- [Yarn](https://classic.yarnpkg.com/en/docs/install)
 
 ## Como executar
 
